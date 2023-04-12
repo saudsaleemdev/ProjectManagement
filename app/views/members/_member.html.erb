@@ -1,0 +1,27 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Country</th>
+      <th>Team</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= member.first_name %> </td>
+      <td><%= member.last_name %> </td>
+      <td><%= member.city %> </td>
+      <td><%= member.state %> </td>
+      <td><%= member.country %> </td>
+      <td><%= member.team.name %> </td>
+      <td>
+        <%= edit_link(member) %>
+        <%= delete_link(member) %>
+      </td>
+    </tr>
+  </tbody>
+</table>

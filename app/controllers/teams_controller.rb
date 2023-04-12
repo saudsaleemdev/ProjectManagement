@@ -4,9 +4,10 @@ class TeamsController < ApplicationController
   before_action :find_team, only: [:members]
 
   def members
+    @members = @team.members
     respond_to do |format|
       format.html
-      format.json { render json: @team.members }
+      format.json { render json: @members }
     end
   end
 
@@ -17,6 +18,6 @@ class TeamsController < ApplicationController
   private
 
   def find_team
-    @team = Team.find(params[:id])
+    @team = Team.find(params[:team_id])
   end
 end

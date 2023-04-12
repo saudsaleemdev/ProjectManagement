@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
   end
 
   def permitted_attributes
-    [:name]
+    [:name, member_ids: []]
   end
 
   private

@@ -1,0 +1,29 @@
+<div class="">
+  <%= simple_form_for [@team, @resource] do |f| %>
+    <%= f.error_notification%>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :first_name, input_html: {class: "form-control"} %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :last_name, input_html: {class: "form-control"} %>
+      </div>
+       <div class="col-md-4">
+        <%= f.input :city, input_html: {class: "form-control"} %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :state, input_html: {class: "form-control"} %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :country, as: :string, input_html: {class: "form-control"} %>
+      </div>
+       <div class="col-md-4">
+        <%= f.association :team, collection: Team.all, input_html: {class: "form-control"} %>
+      </div>
+    </div>
+    <%= render "shared/submit_button", f: f %>
+  <% end %>
+</div>
+

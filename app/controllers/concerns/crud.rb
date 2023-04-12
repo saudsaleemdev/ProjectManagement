@@ -104,7 +104,7 @@ module Crud
 
   def respond_with_error(status = :unprocessable_entity)
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_to request.referer, notice: @resource.errors.full_messages.to_sentence }
       format.json { render json: { errors: @resource.errors.full_messages }, status: status }
     end
   end

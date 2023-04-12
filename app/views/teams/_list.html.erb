@@ -1,0 +1,18 @@
+<div class="container table-responsive py-5">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope='col'>Name</th>
+        <th scope='col'></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @resources.each do |resource| %>
+        <tr>
+          <td><%= link_to(resource.name, team_members_path(resource)) %> </td>
+          <td><%= edit_link(resource) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

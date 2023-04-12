@@ -1,0 +1,5 @@
+<%= render "shared/edit_button", name: "Edit", path: edit_team_path(@resource) %>
+<%= render("shared/delete_button", name: "Delete", path: team_path(@resource)) %>
+
+<p> Team: <b><%= @resource.name %></b></p>
+<%= render "shared/members", members: @resource.members%>

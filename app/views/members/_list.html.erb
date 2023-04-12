@@ -1,0 +1,27 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Country</th>
+      <th>Team</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @resources.each do |resource| %>
+      <tr>
+        <td><%= resource.first_name %> </td>
+        <td><%= resource.last_name %> </td>
+        <td><%= resource.city %> </td>
+        <td><%= resource.state %> </td>
+        <td><%= resource.country %> </td>
+        <td><%= link_to(resource.team.name, team_members_path(@team)) %> </td>
+        <td ><%= link_to('Edit', edit_team_member_path(@team, resource)) %></td>
+        <td ><%= render("shared/delete_button", name: "Delete", path: team_member_path(@team, resource)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
