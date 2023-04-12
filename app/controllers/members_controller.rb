@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  include Resourceable
+  include Crud
 
   def permitted_attributes
     %i[first_name last_name city state country team_id]

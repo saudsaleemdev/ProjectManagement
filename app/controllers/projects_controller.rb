@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  include Resourceable
+  include Crud
 
   def members
     respond_to do |format|
@@ -10,8 +10,7 @@ class ProjectsController < ApplicationController
 
   def add_member
     find_project
-    @project.members << member
-    if @project.save
+    if @resource.members << member
       respond_to do |format|
         format.html { redirect_to redirect_to_path, notice: 'Updated' }
         format.json { render json: { message: 'Updated' } }
@@ -28,11 +27,11 @@ class ProjectsController < ApplicationController
   private
 
   def find_project
-    @project = Project.find(params[:project_id])
+    @resource = Project.find(params[:project_id])
   end
 
   def member
-    @member ||= Member.find(params[:member_id])
+    @member ||= Member.find(params[:id])
   end
 
   def project_with_members

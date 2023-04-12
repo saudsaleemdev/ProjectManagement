@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  include Resourceable
+  include Crud
 
   before_action :find_team, only: [:members]
 

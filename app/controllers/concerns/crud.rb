@@ -1,9 +1,9 @@
-module Resourceable
+module Crud
   extend ActiveSupport::Concern
 
   included do
     skip_before_action :verify_authenticity_token
-
+    before_action :find_resource, only: %i[show edit update destroy]
     before_action :set_default_response_format, only: %i[index show create update]
   end
 
@@ -22,29 +22,29 @@ module Resourceable
   def show
     respond_to do |format|
       format.html
-      format.json { render json: resource }
+      format.json { render json: @resource }
     end
   end
 
   def edit; end
 
   def update
-    if resource.update(resource_params)
+    if @resource.update(resource_params)
       respond_to do |format|
         format.html { redirect_to redirect_to_path, notice: 'Updated' }
-        format.json { render json: { message: 'Updated' } }
+        format.json { render json: { message: 'Updated', resource: @resource } }
       end
     else
-      respond_with_error(resource)
+      respond_with_error(@resource)
     end
   end
 
   def new
-    resource = klass.new
+    @resource = klass.new
 
     respond_to do |format|
       format.html
-      format.json { render json: resource }
+      format.json { render json: @resource }
     end
   end
 
@@ -62,18 +62,24 @@ module Resourceable
   end
 
   def destroy
-    resource.destroy
-    redirect_to [controller_name.to_sym], notice: 'Deleted'
+    if @resource.destroy
+      respond_to do |format|
+        format.html { redirect_to redirect_to_path, notice: 'Deleted' }
+        format.json { render json: { message: 'Deleted' } }
+      end
+    else
+      respond_with_error(@resource)
+    end
   end
 
   private
 
-  def resource
-    @resource ||= klass.find(params[:id])
+  def find_resource
+    @resource = klass.find(params[:id])
   end
 
   def redirect_to_path
-    resource
+    @resource
   end
 
   def klass
@@ -96,10 +102,10 @@ module Resourceable
     false
   end
 
-  def respond_with_error(resource, status = :unprocessable_entity)
+  def respond_with_error(status = :unprocessable_entity)
     respond_to do |format|
       format.html { redirect_to :back }
-      format.json { render json: { errors: resource.errors.full_messages }, status: status }
+      format.json { render json: { errors: @resource.errors.full_messages }, status: status }
     end
   end
 
