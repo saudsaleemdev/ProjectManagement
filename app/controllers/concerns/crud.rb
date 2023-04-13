@@ -35,7 +35,7 @@ module Crud
         format.json { render json: { message: 'Updated', resource: @resource } }
       end
     else
-      respond_with_error(@resource)
+      respond_with_error
     end
   end
 
@@ -57,7 +57,7 @@ module Crud
         format.json { render json: { message: 'Created', resource: @resource } }
       end
     else
-      respond_with_error(@resource)
+      respond_with_error
     end
   end
 
@@ -68,7 +68,7 @@ module Crud
         format.json { render json: { message: 'Deleted' } }
       end
     else
-      respond_with_error(@resource)
+      respond_with_error
     end
   end
 

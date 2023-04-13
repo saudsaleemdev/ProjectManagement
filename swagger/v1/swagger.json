@@ -1,0 +1,486 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/members": {
+      "post": {
+        "summary": "Creates a member",
+        "tags": [
+          "Members"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "member created"
+          },
+          "422": {
+            "description": "invalid request"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "team_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "first_name",
+                  "last_name",
+                  "team_id"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      },
+      "get": {
+        "summary": "List all Members",
+        "tags": [
+          "Members"
+        ],
+        "responses": {
+          "200": {
+            "description": "members listed"
+          }
+        }
+      }
+    },
+    "/members/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a member",
+        "tags": [
+          "Members"
+        ],
+        "responses": {
+          "200": {
+            "description": "member found"
+          },
+          "404": {
+            "description": "member not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a member",
+        "tags": [
+          "Members"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": " member updated"
+          },
+          "422": {
+            "description": "invalid request"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "team_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "first_name",
+                  "last_name",
+                  "team_id"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a member",
+        "tags": [
+          "Members"
+        ],
+        "responses": {
+          "200": {
+            "description": "member deleted"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        }
+      }
+    },
+    "/teams/{team_id}/members": {
+      "get": {
+        "summary": "Retrieves all members for a particular team",
+        "tags": [
+          "Teams"
+        ],
+        "parameters": [
+          {
+            "name": "team_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "lists all members for a team"
+          },
+          "404": {
+            "description": "invalid team id"
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/members": {
+      "get": {
+        "summary": "Retrieves all members for a particular Project",
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list all the members of the project"
+          },
+          "404": {
+            "description": "invalid project id"
+          }
+        }
+      }
+    },
+    "/projects": {
+      "post": {
+        "summary": "Creates a project",
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "project created"
+          },
+          "422": {
+            "description": "invalid request"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "member_ids": {
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      },
+      "get": {
+        "summary": "List all projects",
+        "tags": [
+          "Projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "projects listed"
+          }
+        }
+      }
+    },
+    "/projects/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a project",
+        "tags": [
+          "Projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "project found"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a project",
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "project updated"
+          },
+          "422": {
+            "description": "invalid request"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "member_ids": {
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a project",
+        "tags": [
+          "Projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "project deleted"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        }
+      }
+    },
+    "/teams": {
+      "post": {
+        "summary": "Creates a team",
+        "tags": [
+          "Teams"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "team created"
+          },
+          "422": {
+            "description": "if name missing"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      },
+      "get": {
+        "summary": "Retrieves all teams",
+        "tags": [
+          "Teams"
+        ],
+        "responses": {
+          "200": {
+            "description": "retrive all the teams"
+          }
+        }
+      }
+    },
+    "/teams/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a team",
+        "tags": [
+          "Teams"
+        ],
+        "responses": {
+          "200": {
+            "description": "team found"
+          },
+          "404": {
+            "description": "team not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a team",
+        "tags": [
+          "Teams"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "team updated"
+          },
+          "422": {
+            "description": "invalid request"
+          },
+          "404": {
+            "description": "team not found"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a team",
+        "tags": [
+          "Teams"
+        ],
+        "responses": {
+          "200": {
+            "description": "team deleted"
+          },
+          "404": {
+            "description": "team not found"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "{local}",
+      "variables": {
+        "local": {
+          "default": "http://localhost:3000"
+        }
+      }
+    }
+  ]
+}

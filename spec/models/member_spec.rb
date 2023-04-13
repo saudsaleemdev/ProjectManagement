@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Member, type: :model do
   describe 'associations' do
     it { should belong_to(:team) }
-    it { should have_many(:project_members).dependent(:nullify) }
+    it { should have_many(:project_members).dependent(:destroy) }
     it { should have_many(:projects).through(:project_members) }
   end
 

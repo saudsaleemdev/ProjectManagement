@@ -2,6 +2,6 @@ class TeamsController < ApplicationController
   include Crud
 
   def permitted_attributes
-    [:name]
+    [:name, { member_ids: [] }]
   end
 end

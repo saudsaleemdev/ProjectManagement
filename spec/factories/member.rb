@@ -7,9 +7,9 @@ FactoryBot.define do
     country { Faker::Address.country }
     team
 
-    trait :with_projects do
+    trait :with_project do
       after(:create) do |member|
-        create_list(:project_member, 2, member: member)
+        create(:project_member, member: member)
       end
     end
   end
