@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :projects do
     resources :members, only: [:index], module: 'projects'
   end
+
+  root "projects#index"
 end

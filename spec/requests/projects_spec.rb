@@ -19,18 +19,6 @@ RSpec.describe Project, type: :request do
                 example: {
                   name: 'test project',
                   member_ids: [1, 2, 3]
-                },
-                headers: {
-                  'Content-Type' => {
-                    description: 'The format of the request payload',
-                    type: :string,
-                    example: 'application/json'
-                  },
-                  'Accept' => {
-                    description: 'The format of the response payload',
-                    type: :string,
-                    example: 'application/json'
-                  }
                 }
       response '200', 'project created' do
         let(:project) { { name: 'test project' } }
@@ -41,7 +29,7 @@ RSpec.describe Project, type: :request do
         end
       end
 
-      response '422', 'invalid request' do
+      response '422', 'name must exist' do
         let(:project) { { name: nil } }
         run_test! do
           expect(response.status).to eq(422)
@@ -55,7 +43,7 @@ RSpec.describe Project, type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      response '200', 'projects listed' do
+      response '200', 'Retrives all the projects' do
         run_test! do
           expect(response.status).to eq 200
           expect(JSON.parse(response.body)).to be_an_instance_of(Array)
@@ -114,7 +102,7 @@ RSpec.describe Project, type: :request do
         end
       end
 
-      response '422', 'invalid request' do
+      response '422', 'name already exist' do
         before do
           create(:project, name: 'New Project Name')
         end
@@ -177,7 +165,7 @@ RSpec.describe Project, type: :request do
         end
       end
 
-      response '404', 'invalid project id' do
+      response '404', 'project not found' do
         let(:project_id) { 'invalid' }
         run_test! do
           expect(response.status).to eq 404

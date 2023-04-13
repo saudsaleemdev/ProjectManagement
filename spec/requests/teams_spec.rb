@@ -17,18 +17,6 @@ RSpec.describe Team, type: :request do
                 description: 'Team attributes',
                 example: {
                   name: 'test team'
-                },
-                headers: {
-                  'Content-Type' => {
-                    description: 'The format of the request payload',
-                    type: :string,
-                    example: 'application/json'
-                  },
-                  'Accept' => {
-                    description: 'The format of the response payload',
-                    type: :string,
-                    example: 'application/json'
-                  }
                 }
       response '200', 'team created' do
         let!(:team) { { name: 'Test Team' } }
@@ -39,7 +27,7 @@ RSpec.describe Team, type: :request do
         end
       end
 
-      response '422', 'if name missing' do
+      response '422', 'name must exist' do
         let!(:team) { { name: nil } }
         run_test! do
           expect(response.status).to eq(422)
@@ -110,7 +98,7 @@ RSpec.describe Team, type: :request do
         end
       end
 
-      response '422', 'invalid request' do
+      response '422', "name already exist" do
         before do
           create(:team, name: 'new team Name')
         end
@@ -172,7 +160,7 @@ RSpec.describe Team, type: :request do
         end
       end
 
-      response '404', 'invalid team id' do
+      response '404', 'team not found' do
         let(:team_id) { 'invalid' }
         run_test! do
           expect(response.status).to eq 404

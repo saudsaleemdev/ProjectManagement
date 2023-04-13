@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
     "title": "API V1",
     "version": "v1"
@@ -11,51 +11,63 @@
         "tags": [
           "Members"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-
+          {
+            "name": "member",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "team_id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "first_name",
+                "last_name",
+                "team_id"
+              ]
+            },
+            "required": true,
+            "description": "Member attributes",
+            "example": {
+              "first_name": "John",
+              "last_name": "Doe",
+              "city": "New York",
+              "state": "NY",
+              "country": "USA",
+              "team_id": 1
+            }
+          }
         ],
         "responses": {
           "200": {
             "description": "member created"
           },
           "422": {
-            "description": "invalid request"
+            "description": "first_name, last_name must exist"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "first_name": {
-                    "type": "string"
-                  },
-                  "last_name": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "state": {
-                    "type": "string"
-                  },
-                  "country": {
-                    "type": "string"
-                  },
-                  "team_id": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "first_name",
-                  "last_name",
-                  "team_id"
-                ]
-              }
-            }
-          },
-          "required": true
         }
       },
       "get": {
@@ -63,9 +75,15 @@
         "tags": [
           "Members"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "members listed"
+            "description": "Retrives all the Members"
           }
         }
       }
@@ -75,16 +93,20 @@
         {
           "name": "id",
           "in": "path",
-          "required": true,
-          "schema": {
-            "type": "integer"
-          }
+          "type": "integer",
+          "required": true
         }
       ],
       "get": {
         "summary": "Retrieves a member",
         "tags": [
           "Members"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -100,52 +122,55 @@
         "tags": [
           "Members"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-
+          {
+            "name": "member",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "team_id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "first_name",
+                "last_name",
+                "team_id"
+              ]
+            }
+          }
         ],
         "responses": {
           "200": {
             "description": " member updated"
           },
           "422": {
-            "description": "invalid request"
+            "description": "first_name, last_name already exist"
           },
           "404": {
             "description": "project not found"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "first_name": {
-                    "type": "string"
-                  },
-                  "last_name": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "state": {
-                    "type": "string"
-                  },
-                  "country": {
-                    "type": "string"
-                  },
-                  "team_id": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "first_name",
-                  "last_name",
-                  "team_id"
-                ]
-              }
-            }
           }
         }
       },
@@ -154,12 +179,18 @@
         "tags": [
           "Members"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "member deleted"
           },
           "404": {
-            "description": "project not found"
+            "description": "member not found"
           }
         }
       }
@@ -170,14 +201,18 @@
         "tags": [
           "Teams"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "team_id",
             "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
+            "type": "integer",
+            "required": true
           }
         ],
         "responses": {
@@ -185,7 +220,7 @@
             "description": "lists all members for a team"
           },
           "404": {
-            "description": "invalid team id"
+            "description": "team not found"
           }
         }
       }
@@ -196,14 +231,18 @@
         "tags": [
           "Projects"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "project_id",
             "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -211,7 +250,7 @@
             "description": "list all the members of the project"
           },
           "404": {
-            "description": "invalid project id"
+            "description": "project not found"
           }
         }
       }
@@ -222,37 +261,49 @@
         "tags": [
           "Projects"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-
+          {
+            "name": "project",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "member_ids": {
+                  "type": "array"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            },
+            "required": true,
+            "description": "Project attributes",
+            "example": {
+              "name": "test project",
+              "member_ids": [
+                1,
+                2,
+                3
+              ]
+            }
+          }
         ],
         "responses": {
           "200": {
             "description": "project created"
           },
           "422": {
-            "description": "invalid request"
+            "description": "name must exist"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "member_ids": {
-                    "type": "array"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          },
-          "required": true
         }
       },
       "get": {
@@ -260,9 +311,15 @@
         "tags": [
           "Projects"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "projects listed"
+            "description": "Retrives all the projects"
           }
         }
       }
@@ -272,16 +329,20 @@
         {
           "name": "id",
           "in": "path",
-          "required": true,
-          "schema": {
-            "type": "integer"
-          }
+          "type": "integer",
+          "required": true
         }
       ],
       "get": {
         "summary": "Retrieves a project",
         "tags": [
           "Projects"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -297,38 +358,41 @@
         "tags": [
           "Projects"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-
+          {
+            "name": "project",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "member_ids": {
+                  "type": "array"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
         ],
         "responses": {
           "200": {
             "description": "project updated"
           },
           "422": {
-            "description": "invalid request"
+            "description": "name already exist"
           },
           "404": {
             "description": "project not found"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "member_ids": {
-                    "type": "array"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
           }
         }
       },
@@ -336,6 +400,12 @@
         "summary": "Deletes a project",
         "tags": [
           "Projects"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -353,40 +423,53 @@
         "tags": [
           "Teams"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-
+          {
+            "name": "team",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            },
+            "required": true,
+            "description": "Team attributes",
+            "example": {
+              "name": "test team"
+            }
+          }
         ],
         "responses": {
           "200": {
             "description": "team created"
           },
           "422": {
-            "description": "if name missing"
+            "description": "name must exist"
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          },
-          "required": true
         }
       },
       "get": {
         "summary": "Retrieves all teams",
         "tags": [
           "Teams"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -400,16 +483,20 @@
         {
           "name": "id",
           "in": "path",
-          "required": true,
-          "schema": {
-            "type": "integer"
-          }
+          "type": "integer",
+          "required": true
         }
       ],
       "get": {
         "summary": "Retrieves a team",
         "tags": [
           "Teams"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -425,35 +512,38 @@
         "tags": [
           "Teams"
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-
+          {
+            "name": "team",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
         ],
         "responses": {
           "200": {
             "description": "team updated"
           },
           "422": {
-            "description": "invalid request"
+            "description": "name already exist"
           },
           "404": {
             "description": "team not found"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
           }
         }
       },
@@ -461,6 +551,12 @@
         "summary": "Deletes a team",
         "tags": [
           "Teams"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {

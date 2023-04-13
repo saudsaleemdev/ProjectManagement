@@ -28,20 +28,7 @@ RSpec.describe Member, type: :request do
         state: 'NY',
         country: 'USA',
         team_id: 1
-      },
-      headers: {
-        'Content-Type' => {
-          description: 'The format of the request payload',
-          type: :string,
-          example: 'application/json'
-        },
-        'Accept' => {
-          description: 'The format of the response payload',
-          type: :string,
-          example: 'application/json'
-        }
       }
-
       response '200', 'member created' do
         let(:team) { create(:team) }
         let!(:member) { { first_name: 'test', last_name: 'project', team_id: team.id } }
@@ -52,7 +39,7 @@ RSpec.describe Member, type: :request do
         end
       end
 
-      response '422', 'invalid request' do
+      response '422', 'first_name, last_name must exist' do
         let(:member) { { first_name: nil } }
         run_test! do
           expect(response.status).to eq(422)
@@ -66,7 +53,7 @@ RSpec.describe Member, type: :request do
       consumes 'application/json'
       produces 'application/json'
 
-      response '200', 'members listed' do
+      response '200', 'Retrives all the Members' do
         let!(:member) { create(:member) }
         run_test! do
           expect(response.status).to eq 200
@@ -131,7 +118,7 @@ RSpec.describe Member, type: :request do
         end
       end
 
-      response '422', 'invalid request' do
+      response '422', 'first_name, last_name already exist' do
         before do
           create(:member, first_name: 'test', last_name: 'name')
         end
@@ -166,7 +153,7 @@ RSpec.describe Member, type: :request do
         end
       end
 
-      response '404', 'project not found' do
+      response '404', 'member not found' do
         let(:id) { 'invalid' }
         run_test! do
           expect(response.status).to eq 404
@@ -193,7 +180,7 @@ RSpec.describe Member, type: :request do
         end
       end
 
-      response '404', 'invalid team id' do
+      response '404', 'team not found' do
         let(:team_id) { 'invalid' }
         run_test! do
           expect(response.status).to eq 404
@@ -221,7 +208,7 @@ RSpec.describe Member, type: :request do
         end
       end
 
-      response '404', 'invalid project id' do
+      response '404', 'project not found' do
         let(:project_id) { 'invalid' }
         run_test! do
           expect(response.status).to eq 404

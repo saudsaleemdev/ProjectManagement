@@ -4,7 +4,6 @@ module Crud
   included do
     skip_before_action :verify_authenticity_token
     before_action :find_resource, only: %i[show edit update destroy]
-    before_action :set_default_response_format, only: %i[index show create update]
   end
 
   def index
@@ -107,9 +106,5 @@ module Crud
       format.html { redirect_to request.referer, notice: @resource.errors.full_messages.to_sentence }
       format.json { render json: { errors: @resource.errors.full_messages }, status: status }
     end
-  end
-
-  def set_default_response_format
-    request.format = :json if request.headers['Accept'].include?('application/json')
   end
 end
