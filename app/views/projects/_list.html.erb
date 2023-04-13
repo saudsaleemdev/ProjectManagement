@@ -1,0 +1,20 @@
+<div class="container table-responsive py-5">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope='col'>Name</th>
+        <th scope='col'>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @resources.each do |resource| %>
+        <tr>
+          <td><%= link_to(resource.name, project_members_path(resource)) %> </td>
+          <td>
+            <%= render "shared/actions", edit_path: edit_project_path(resource), delete_path: project_path(resource) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

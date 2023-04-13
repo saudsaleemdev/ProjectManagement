@@ -1,0 +1,9 @@
+<% if resource.errors.present? %>
+<div class="alert alert-danger">Please review the problems below:
+  <ul>
+    <% resource.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>

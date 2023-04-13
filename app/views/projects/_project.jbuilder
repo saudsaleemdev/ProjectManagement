@@ -1,0 +1,1 @@
+json.call(resource, :name)

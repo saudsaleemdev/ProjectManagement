@@ -1,0 +1,13 @@
+<div class='container mt-5'>
+  <p><b>Member:</b> <%=  member.name%></p>
+  <p><b>Team:</b><%= member.team.name%></p>
+  <p><b>City:</b><%= member.city%></p>
+  <p><b>State:</b><%= member.state%></p>
+  <p><b>Country:</b><%= member.country%></p>
+  <p><b>Project:</b>
+  <% member.projects.each do |project| %>
+    <%= project.name %>
+  <% end %>
+  </p>
+  <%= render "shared/actions", edit_path: edit_member_path(member), delete_path: member_path(member) %>
+</div>

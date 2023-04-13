@@ -1,0 +1,582 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/members": {
+      "post": {
+        "summary": "Creates a member",
+        "tags": [
+          "Members"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "member",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "team_id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "first_name",
+                "last_name",
+                "team_id"
+              ]
+            },
+            "required": true,
+            "description": "Member attributes",
+            "example": {
+              "first_name": "John",
+              "last_name": "Doe",
+              "city": "New York",
+              "state": "NY",
+              "country": "USA",
+              "team_id": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "member created"
+          },
+          "422": {
+            "description": "first_name, last_name must exist"
+          }
+        }
+      },
+      "get": {
+        "summary": "List all Members",
+        "tags": [
+          "Members"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrives all the Members"
+          }
+        }
+      }
+    },
+    "/members/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a member",
+        "tags": [
+          "Members"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "member found"
+          },
+          "404": {
+            "description": "member not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a member",
+        "tags": [
+          "Members"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "member",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "team_id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "first_name",
+                "last_name",
+                "team_id"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " member updated"
+          },
+          "422": {
+            "description": "first_name, last_name already exist"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a member",
+        "tags": [
+          "Members"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "member deleted"
+          },
+          "404": {
+            "description": "member not found"
+          }
+        }
+      }
+    },
+    "/teams/{team_id}/members": {
+      "get": {
+        "summary": "Retrieves all members for a particular team",
+        "tags": [
+          "Teams"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "team_id",
+            "in": "path",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "lists all members for a team"
+          },
+          "404": {
+            "description": "team not found"
+          }
+        }
+      }
+    },
+    "/projects/{project_id}/members": {
+      "get": {
+        "summary": "Retrieves all members for a particular Project",
+        "tags": [
+          "Projects"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list all the members of the project"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        }
+      }
+    },
+    "/projects": {
+      "post": {
+        "summary": "Creates a project",
+        "tags": [
+          "Projects"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "project",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "member_ids": {
+                  "type": "array"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            },
+            "required": true,
+            "description": "Project attributes",
+            "example": {
+              "name": "test project",
+              "member_ids": [
+                1,
+                2,
+                3
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "project created"
+          },
+          "422": {
+            "description": "name must exist"
+          }
+        }
+      },
+      "get": {
+        "summary": "List all projects",
+        "tags": [
+          "Projects"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrives all the projects"
+          }
+        }
+      }
+    },
+    "/projects/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a project",
+        "tags": [
+          "Projects"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "project found"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a project",
+        "tags": [
+          "Projects"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "project",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "member_ids": {
+                  "type": "array"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "project updated"
+          },
+          "422": {
+            "description": "name already exist"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a project",
+        "tags": [
+          "Projects"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "project deleted"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        }
+      }
+    },
+    "/teams": {
+      "post": {
+        "summary": "Creates a team",
+        "tags": [
+          "Teams"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "team",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            },
+            "required": true,
+            "description": "Team attributes",
+            "example": {
+              "name": "test team"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "team created"
+          },
+          "422": {
+            "description": "name must exist"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves all teams",
+        "tags": [
+          "Teams"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "retrive all the teams"
+          }
+        }
+      }
+    },
+    "/teams/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a team",
+        "tags": [
+          "Teams"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "team found"
+          },
+          "404": {
+            "description": "team not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a team",
+        "tags": [
+          "Teams"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "team",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "team updated"
+          },
+          "422": {
+            "description": "name already exist"
+          },
+          "404": {
+            "description": "team not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a team",
+        "tags": [
+          "Teams"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "team deleted"
+          },
+          "404": {
+            "description": "team not found"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "{local}",
+      "variables": {
+        "local": {
+          "default": "http://localhost:3000"
+        }
+      }
+    }
+  ]
+}
