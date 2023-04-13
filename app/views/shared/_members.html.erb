@@ -8,17 +8,21 @@
         <th>State</th>
         <th>Country</th>
         <th>Team</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <% members.each do |member| %>
         <tr>
-          <td><%= member.first_name %> </td>
+          <td><%= link_to member.first_name, member_path(member) %> </td>
           <td><%= member.last_name %> </td>
           <td><%= member.city %> </td>
           <td><%= member.state %> </td>
           <td><%= member.country %> </td>
           <td><%= member.team.name %> </td>
+          <td>
+            <%= render "shared/actions", edit_path: edit_member_path(member), delete_path: member_path(member) %>
+          </td>
         </tr>
       <% end %>
     </tbody>

@@ -1,17 +1,10 @@
-<div class="">
-  <%= simple_form_for @resource do |f| %>
-    <%= f.error_notification%>
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.input :name, input_html: {class: "form-control"} %>
-      </div>
-
-      <div class="col-md-6">
-        <%= f.association :members, collection: Member.all.map{|member| [member.name, member.id]}, input_html: {class: "form-control", multiple: true} %>
-      </div>
-
-    </div>
-    <%= render "shared/submit_button", f: f %>
-  <% end %>
-</div>
-
+<%= simple_form_for @resource do |f| %>
+  <%= f.error_notification%>
+  <div class="form-group">
+    <%= f.input :name, input_html: {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.association :members, collection: Member.all.map{|member| [member.name, member.id]}, input_html: {class: "form-control", multiple: true} %>
+  </div>
+  <%= render "shared/submit_button", f: f %>
+<% end %>

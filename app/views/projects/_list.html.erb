@@ -11,8 +11,7 @@
         <tr>
           <td><%= link_to(resource.name, project_path(resource)) %> </td>
           <td>
-            <%= edit_link(resource) %>
-            <%= delete_link(resource) %>
+            <%= render "shared/actions", edit_path: edit_project_path(resource), delete_path: project_path(resource) %>
           </td>
         </tr>
       <% end %>

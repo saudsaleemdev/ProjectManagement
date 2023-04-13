@@ -20,7 +20,7 @@
         <%= f.input :country, as: :string, input_html: {class: "form-control"} %>
       </div>
        <div class="col-md-4">
-        <%= f.association :team, collection: Team.all, input_html: {class: "form-control"} %>
+        <%= f.association :team, collection: Team.all, include_blank: false, input_html: {class: "form-control"} %>
       </div>
     </div>
     <%= render "shared/submit_button", f: f %>

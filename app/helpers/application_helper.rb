@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def delete_link(resource, name = 'Delete')
-    link_to name, resource, class: 'text-danger font-weight-bold', method: :delete, data: {confirm: 'Are you sure?'}
+    link_to name, resource, class: 'text-danger font-weight-bold', method: :delete, data: { confirm: 'Are you sure?' }
   end
 end

@@ -1,27 +1,13 @@
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Country</th>
-      <th>Team</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= member.first_name %> </td>
-      <td><%= member.last_name %> </td>
-      <td><%= member.city %> </td>
-      <td><%= member.state %> </td>
-      <td><%= member.country %> </td>
-      <td><%= member.team.name %> </td>
-      <td>
-        <%= edit_link(member) %>
-        <%= delete_link(member) %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class='container mt-5'>
+  <p><b>Member:</b> <%=  member.name%></p>
+  <p><b>Team:</b><%= member.team.name%></p>
+  <p><b>City:</b><%= member.city%></p>
+  <p><b>State:</b><%= member.state%></p>
+  <p><b>Country:</b><%= member.country%></p>
+  <p><b>Project:</b>
+  <% member.projects.each do |project| %>
+    <%= project.name %>
+  <% end %>
+  </p>
+  <%= render "shared/actions", edit_path: edit_member_path(member), delete_path: member_path(member) %>
+</div>

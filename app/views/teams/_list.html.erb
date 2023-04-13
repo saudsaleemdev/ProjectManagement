@@ -3,14 +3,14 @@
     <thead>
       <tr>
         <th scope='col'>Name</th>
-        <th scope='col'></th>
+        <th scope='col'>Actions</th>
       </tr>
     </thead>
     <tbody>
       <% @resources.each do |resource| %>
         <tr>
           <td><%= link_to(resource.name, team_members_path(resource)) %> </td>
-          <td><%= edit_link(resource) %></td>
+          <td><%= render "shared/actions", edit_path: edit_team_path(resource), delete_path: team_path(resource) %></td>
         </tr>
       <% end %>
     </tbody>
