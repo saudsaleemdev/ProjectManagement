@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   end
 
   resources :projects do
-    resources :members, only: [:update], to: 'projects#add_member'
-    resources :members, only: :index, to: 'projects#members'
+    resources :members, only: [:index], module: 'projects'
   end
 end

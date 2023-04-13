@@ -1,0 +1,3 @@
+<b><%= @project.name %></b>
+<%= render "shared/members", members: @project.members%>
+<%= render "shared/actions", edit_path: edit_project_path(@project), delete_path: project_path(@project) %>

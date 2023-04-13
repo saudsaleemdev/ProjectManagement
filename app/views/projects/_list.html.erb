@@ -9,7 +9,7 @@
     <tbody>
       <% @resources.each do |resource| %>
         <tr>
-          <td><%= link_to(resource.name, project_path(resource)) %> </td>
+          <td><%= link_to(resource.name, project_members_path(resource)) %> </td>
           <td>
             <%= render "shared/actions", edit_path: edit_project_path(resource), delete_path: project_path(resource) %>
           </td>

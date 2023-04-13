@@ -1,9 +1,7 @@
-module Teams
+module Projects
   class MembersController < ApplicationController
-    before_action :team, only: :index
-
     def index
-      @members = @team.members
+      @members = project.members
       respond_to do |format|
         format.html
         format.json { render json: @members }
@@ -12,8 +10,8 @@ module Teams
 
     private
 
-    def team
-      @team ||= Team.find(params[:team_id])
+    def project
+      @project ||= Project.includes(:members).find(params[:project_id])
     end
   end
 end
